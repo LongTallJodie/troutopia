@@ -6,4 +6,4 @@ Troutopia is a simple webcomic backend for any creator, but mostly for, me, John
 
 ## Status
 
-**12/11/19:** Basic comic navigation is fully functional.  Huzzah!
+* **12/11/19:** Basic comic navigation is fully functional.  Huzzah!
