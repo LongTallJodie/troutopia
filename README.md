@@ -10,4 +10,5 @@ I taught myself PHP in the process of coding this, so things may or may not work
 
 ## Status
 
+* **12/12/19:** Bugs ironed out index page comics and navigation.  News posts have been implemented.
 * **12/11/19:** Basic comic navigation is fully functional.  Huzzah!
