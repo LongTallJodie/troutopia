@@ -35,3 +35,4 @@ This is pretty lazy documentation and will be updated in the future, on the off-
 ### Notes
 
 * The PHP hooks will **not** work inside of news post files.
+* Use this code at your own risk.  It should be fine, but I'm not responsible if something on your website explodes.
