@@ -25,7 +25,7 @@ This is pretty lazy documentation and will be updated in the future, on the off-
 * Place all your news files (named identically to the comic files) in the news directory.
 * Paste '<?php include('troutopia.php') ?>' at the very beginning of your comic.php and index.php files, after the <body> tag.
 * Paste '<?php show_comic() ?>' anywhere you'd like the comic image to appear.
-* Paste '<?php show_news() ?>' anywhere you'd like the news post to appear.
+  * Paste <code><?php show_news() ?></code> anywhere you'd like the news post to appear.
 * Paste '<?php first_comic() ?>', '<?php previous_comic() ?>', '<?php next_comic() ?>', and '<?php last_comic() ?>' anywhere you'd like the comic navigation links to appear.
   
 ### Extra Hooks
