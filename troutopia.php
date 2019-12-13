@@ -139,11 +139,11 @@ function last_comic() {
 /* These functions display the various dynamic sections. */
 
 function show_comic() {
-	global $site, $comic_dir, $comic_ext, $query_date, $last;
+	global $site, $comic_dir, $comic_ext, $query_date, $last, $pretty_date, $pretty_last_date;
 	if ($query_date == null) {
-		echo "<img src='$site/$comic_dir/$last.$comic_ext'>";
+		echo "<img src='$site/$comic_dir/$last.$comic_ext' alt='Comic for $pretty_last_date' title='Comic for $pretty_last_date'>";
 	} else {
-		echo "<img src='$site/$comic_dir/$query_date.$comic_ext'>";
+		echo "<img src='$site/$comic_dir/$query_date.$comic_ext' alt='Comic for $pretty_date' title='Comic for $pretty_date'>";
 	}
 }
 
