@@ -31,3 +31,7 @@ This is pretty lazy documentation and will be updated in the future, on the off-
 ### Extra Hooks
 
 * `<?php pretty_date() ?>` will display the date of that page's comic in a "pretty" format (ie, January 31, 2000).  This only works on archive pages.  `<?php pretty_last_date() ?>` will display the date of the latest comic in a "pretty" format.  This works on any page.
+
+### Notes
+
+* The PHP hooks will **not** work inside of news post files, but standard HTML will.
