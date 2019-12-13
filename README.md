@@ -34,4 +34,4 @@ This is pretty lazy documentation and will be updated in the future, on the off-
 
 ### Notes
 
-* The PHP hooks will **not** work inside of news post files, but standard HTML will.
+* The PHP hooks will **not** work inside of news post files.
