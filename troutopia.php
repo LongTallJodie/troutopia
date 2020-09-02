@@ -4,20 +4,25 @@
 
 /* Version Alpha */
 
-/* Troutopia is a simple webcomic backend for any creator, but mostly for, me, John S. Troutman. It allows users to avoid large installations of other CMS platforms and also gives users more control over their website's design. Troutopia is fairly no-frills and does absolutely no web design for you; all it does is run the webcomic archive with some simple hooks. I taught myself PHP in the process of coding this, so things may or may not work correctly. Feel free to shoot any questions about Troutopia to me on Twitter via @theonlytrout or through e-mail via troutcave@gmail.com. Read my comics at troutcave.net. */
+/* Troutopia is a simple webcomic backend for any creator, but mostly for me, Jodie Troutman. It allows users to avoid large installations of other CMS platforms and also gives users more control over their website's design. Troutopia is fairly no-frills and does absolutely no web design for you; all it does is run the webcomic archive with some simple hooks. I taught myself PHP in the process of coding this, so things may or may not work correctly. Feel free to shoot any questions about Troutopia to me on Twitter via @longtalljodie or through e-mail via troutcave@gmail.com. Read my comics at troutcave.net. */
 
 /* The following code has been annotated to the best of my ability, but please reference the Troutopia manual for installation details. */
 
 /* Change the following variables to match your site.  Edit only what's inside the quotes. */
 
-$site = "http://troutcave.net/troutopia";		// Website URL with leading HTTP:// or HTTPS://
+$site = "https://litbrick.com";		// Website URL with leading https:// or HTTPS://
 $comic_dir = "comics";				// Comic Directory
 $news_dir = "news";					// News Directory
 $cast_dir = "cast";					// Cast Directory
 $extra_dir = "extra";				// Extra Directory
-$comic_ext = "jpg";					// Comic File Extension (PNG, JPG)
+$comic_ext = "png";					// Comic File Extension (PNG, JPG)
 $news_ext = "php";					// News File Extension (Also Used For Bonuses)
-$first_comic = "2017-01-31";		// Date of the First Comic in YYYY-MM-DD
+$first_comic = "2010-04-05";		// Date of the First Comic in YYYY-MM-DD
+$first_nav = "<span class='fa-stack fa-lg icon-hover' title='First Comic'><i class='fa fa-circle fa-stack-2x icon-background text-shadow'></i><i class='fas fa-angle-double-left fa-stack-1x icon-text'></i></span>";			// Navigation Text (Can Be Any HTML Span)
+$last_nav = "<span class='fa-stack fa-lg icon-hover' title='Last Comic'><i class='fa fa-circle fa-stack-2x icon-background text-shadow'></i><i class='fas fa-angle-double-right fa-stack-1x icon-text'></i></span>";			// Navigation Text (Can Be Any HTML Span)
+$previous_nav = "<span class='fa-stack fa-lg icon-hover' title='Previous Comic'><i class='fa fa-circle fa-stack-2x icon-background text-shadow'></i><i class='fas fa-angle-left fa-stack-1x icon-text'></i></span>";	// Navigation Text (Can Be Any HTML Span)
+$next_nav = "<span class='fa-stack fa-lg icon-hover' title='Next Comic'><i class='fa fa-circle fa-stack-2x icon-background text-shadow'></i><i class='fas fa-angle-right fa-stack-1x icon-text'></i></span>";			// Navigation Text (Can Be Any HTML Span)
+$random_nav = "<span class='fa-stack fa-lg icon-hover' title='Random Comic'><i class='fa fa-circle fa-stack-2x icon-background text-shadow'></i><i class='fas fa-dice fa-stack-1x icon-text'></i></span>";			// Navigation Text (Can Be Any HTML Span)
 
 /* Please stop editing now, unless you really know what you're doing. You shouldn't have to edit the rest of the file unless you're a particularly elite hacker, possibly in a van surrounded by several monitors. */
 
@@ -26,7 +31,7 @@ $first_comic = "2017-01-31";		// Date of the First Comic in YYYY-MM-DD
 $comics_raw = glob("$comic_dir/*.*");
 
 function comic_rtrim($t) {
-	return rtrim($t,".jpg");
+	return rtrim($t,".png");
 }
 function comic_ltrim($t) {
 	return ltrim($t,"comics/");
@@ -89,61 +94,79 @@ if ($query_date == null) {
 	$previous = $comics[count($comics)-2];
 }
 
+/* Define the random comic. */
+
+$random = array_rand($comics, 1);
+
+/* Define date strings. */
+
 $string_date = strtotime($query_date);
 $pretty_date = date("F d, Y", $string_date);
 $string_last_date = strtotime($last);
 $pretty_last_date = date("F d, Y", $string_last_date);
 
+/* Defines the title of the current comic using the first line of the news file. */
+
+$ftitle = fopen("$site/$news_dir/$query_date.$news_ext", "r");
+$comic_title = strip_tags(fgets($ftitle));
+fclose($ftitle);
+
 /* These functions are used for comic archive navigation */
 
 function first_comic() {
-	global $site, $comic_dir, $comic_ext, $first_comic, $comics, $previous, $now, $query_date, $last;
+	global $site, $comic_dir, $comic_ext, $first_comic, $comics, $previous, $now, $query_date, $last, $first_nav;
 	if ($query_date == $first_comic) {
-		echo "<span style='opacity:.3'>First Comic</span>";
+		echo "<span style='opacity:.3'>$first_nav</span>";
 	} else {
-		echo "<a href='$site/comic.php?$first_comic'>First Comic</a>";
+		echo "<a href='$site/comic.php?$first_comic'>$first_nav</a>";
 	}
 }
 
 function previous_comic() {
-	global $site, $comic_dir, $comic_ext, $first_comic, $comics, $previous, $now, $query_date, $last;
+	global $site, $comic_dir, $comic_ext, $first_comic, $comics, $previous, $now, $query_date, $last, $previous_nav;
 	if ($query_date == $first_comic) {
-		echo "<span style='opacity:.3'>Previous Comic</span>";
+		echo "<span style='opacity:.3'>$previous_nav</span>";
 	} else {
-		echo "<a href='$site/comic.php?$previous'>Previous Comic</a>";
+		echo "<a href='$site/comic.php?$previous'>$previous_nav</a>";
 	}
 }
 
 function next_comic() {
-	global $site, $comic_dir, $comic_ext, $comics, $next, $now, $query_date, $last;
+	global $site, $comic_dir, $comic_ext, $comics, $next, $now, $query_date, $last, $next_nav;
 	if ($query_date == null) {
-		echo "<span style='opacity:.3'>Next Comic</span>";
+		echo "<span style='opacity:.3'>$next_nav</span>";
 	} elseif ($query_date == $last) {
-		echo "<span style='opacity:.3'>Next Comic</span>";
+		echo "<span style='opacity:.3'>$next_nav</span>";
 	} else {
-		echo "<a href='$site/comic.php?$next'>Next Comic</a>";
+		echo "<a href='$site/comic.php?$next'>$next_nav</a>";
 	}
 }
 
 function last_comic() {
-	global $site, $comic_dir, $comic_ext, $comics, $next, $now, $query_date, $last;
+	global $site, $comic_dir, $comic_ext, $comics, $next, $now, $query_date, $last, $last_nav;
 	if ($query_date == null) {
-		echo "<span style='opacity:.3'>Last Comic</span>";
+		echo "<span style='opacity:.3'>$last_nav</span>";
 	} elseif ($query_date == $last) {
-		echo "<span style='opacity:.3'>Last Comic</span>";
+		echo "<span style='opacity:.3'>$last_nav</span>";
 	} else {
-		echo "<a href='$site/comic.php?$last'>Last Comic</a>";
+		echo "<a href='$site/comic.php?$last'>$last_nav</a>";
 	}
 }
+
+function random_comic() {
+	global $site, $random, $random_nav, $comics;
+	echo "<a href='$site/comic.php?$comics[$random]'>$random_nav</a>";
+}
+
 
 /* These functions display the various dynamic sections. */
 
 function show_comic() {
-	global $site, $comic_dir, $comic_ext, $query_date, $last, $pretty_date, $pretty_last_date;
+	global $site, $comic_dir, $comic_ext, $query_date, $last, $pretty_date, $pretty_last_date, $comic_title;
 	if ($query_date == null) {
-		echo "<img src='$site/$comic_dir/$last.$comic_ext' alt='Comic for $pretty_last_date' title='Comic for $pretty_last_date'>";
+		echo "<img src='$site/$comic_dir/$last.$comic_ext' alt='$comic_title Comic Strip' title='$comic_title Comic Strip'>";
 	} else {
-		echo "<img src='$site/$comic_dir/$query_date.$comic_ext' alt='Comic for $pretty_date' title='Comic for $pretty_date'>";
+		echo "<img src='$site/$comic_dir/$query_date.$comic_ext' alt='$comic_title Comic Strip' title='$comic_title Comic Strip'>";
 	}
 }
 
