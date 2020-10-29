@@ -10,6 +10,7 @@ I taught myself PHP in the process of coding this, so things may or may not work
 
 ### Version Alpha
 
+* **10/29/20:** Fixed a bug allowing you to still click the last comic in the archive. Added the "date=" key to all the comic page URLs.
 * **9/2/20:** Refreshed the code to reflect my name change.
 * **12/12/19:** Bugs ironed out index page comics and navigation.  News posts have been implemented.  Added a safety check to redirect readers to the homepage in case they type an invalid comic date into the URL.
 * **12/11/19:** Basic comic navigation is fully functional.  Huzzah!
@@ -33,6 +34,7 @@ This is pretty lazy documentation and will be updated in the future, on the off-
 
 * `<?php pretty_date() ?>` will display the date of that page's comic in a "pretty" format (ie, January 31, 2000).  This only works on archive pages.  `<?php pretty_last_date() ?>` will display the date of the latest comic in a "pretty" format.  This works on any page.
 * `<?php random_comic() ?>` will add a Random Comic option to your navigation links.  This is great for gag strips!
+* `<?php comic_click() ?><?php show_comic() ?></a>` will show your comic **and** make it clickable for navigation.
 
 ### Notes
 
