@@ -10,7 +10,7 @@
 
 /* Change the following variables to match your site.  Edit only what's inside the quotes. */
 
-$site = "https://litbrick.com";		// Website URL with leading https:// or HTTPS://
+$site = "https://litbrick.com";		// Website URL with leading https:// or http://
 $comic_dir = "comics";				// Comic Directory
 $news_dir = "news";					// News Directory
 $cast_dir = "cast";					// Cast Directory
@@ -53,7 +53,9 @@ $comics = array_filter($comics,function($date){
 
 /* Pull comic date from the URL query. */
 
-$query_date = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+$query_date_full = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+$query_date_temp = parse_str($query_date_full, $query_date_array);
+$query_date = $query_date_array['date'];
 
 /* Redirect to the homepage if the URL contains an invalid comic date. */
 
@@ -118,7 +120,7 @@ function first_comic() {
 	if ($query_date == $first_comic) {
 		echo "<span style='opacity:.3'>$first_nav</span>";
 	} else {
-		echo "<a href='$site/comic.php?$first_comic'>$first_nav</a>";
+		echo "<a href='$site/comic.php?date=$first_comic'>$first_nav</a>";
 	}
 }
 
@@ -127,7 +129,7 @@ function previous_comic() {
 	if ($query_date == $first_comic) {
 		echo "<span style='opacity:.3'>$previous_nav</span>";
 	} else {
-		echo "<a href='$site/comic.php?$previous'>$previous_nav</a>";
+		echo "<a href='$site/comic.php?date=$previous'>$previous_nav</a>";
 	}
 }
 
@@ -138,7 +140,7 @@ function next_comic() {
 	} elseif ($query_date == $last) {
 		echo "<span style='opacity:.3'>$next_nav</span>";
 	} else {
-		echo "<a href='$site/comic.php?$next'>$next_nav</a>";
+		echo "<a href='$site/comic.php?date=$next'>$next_nav</a>";
 	}
 }
 
@@ -149,13 +151,13 @@ function last_comic() {
 	} elseif ($query_date == $last) {
 		echo "<span style='opacity:.3'>$last_nav</span>";
 	} else {
-		echo "<a href='$site/comic.php?$last'>$last_nav</a>";
+		echo "<a href='$site/comic.php?date=$last'>$last_nav</a>";
 	}
 }
 
 function random_comic() {
 	global $site, $random, $random_nav, $comics;
-	echo "<a href='$site/comic.php?$comics[$random]'>$random_nav</a>";
+	echo "<a href='$site/comic.php?date=$comics[$random]'>$random_nav</a>";
 }
 
 
@@ -179,6 +181,19 @@ function show_news() {
 		$news_file = file_get_contents("$site/$news_dir/$query_date.$news_ext");
 		echo $news_file;
 	}
+}
+
+/* This function aids in making the comic strip clickable. */
+
+function comic_click() {
+	global $site, $comic_dir, $comic_ext, $comics, $next, $now, $query_date, $last, $next_nav;
+	if ($query_date == null) {
+		null;
+		} elseif ($query_date == $last) {
+			null;
+		} else {
+			echo "<a href='$site/comic.php?date=$next'>";
+		}
 }
 
 ?>
