@@ -6,6 +6,8 @@ Troutopia is fairly no-frills and does absolutely no web design for you; all it 
 
 I taught myself PHP in the process of coding this, so things may or may not work correctly. Feel free to shoot any questions about Troutopia to me on Twitter via @theonlytrout or through e-mail via troutcave@gmail.com. You could also do me a favor and read my comics at troutcave.net.
 
+A demo is available at https://litbrick.com/.
+
 ## Status
 
 ### Version Alpha
