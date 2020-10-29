@@ -4,9 +4,9 @@ Troutopia is a simple webcomic backend for any creator, but mostly for, me, John
 
 Troutopia is fairly no-frills and does absolutely no web design for you; all it does is run the webcomic archive with some simple hooks. Said hooks are one line bits of text you can drop into any section of your website.
 
-I taught myself PHP in the process of coding this, so things may or may not work correctly. Feel free to shoot any questions about Troutopia to me on Twitter via @theonlytrout or through e-mail via troutcave@gmail.com. You could also do me a favor and read my comics at troutcave.net.
+I taught myself PHP in the process of coding this, so things may or may not work correctly. Feel free to shoot any questions about Troutopia to me on Twitter via @LongTallJodie or through e-mail via troutcave@gmail.com. I also have a Patreon page at https://www.patreon.com/troutcave.
 
-A demo is available at https://litbrick.com/.
+A demo of Troutopia in action is available at https://litbrick.com/.
 
 ## Status
 
