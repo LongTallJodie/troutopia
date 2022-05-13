@@ -1,6 +1,6 @@
 # Troutopia Webcomic Management System
 
-Troutopia is a simple webcomic backend for any creator, but mostly for, me, John S. Troutman. It allows users to avoid large installations of other CMS platforms and also gives users more control over their website's code.
+Troutopia is a simple webcomic backend for any creator, but mostly for, me, Jodie Troutman. It allows users to avoid large installations of other CMS platforms and also gives users more control over their website's code.
 
 Troutopia is fairly no-frills and does absolutely no web design for you; all it does is run the webcomic archive with some simple hooks. Said hooks are one line bits of text you can drop into any section of your website.
 
@@ -12,6 +12,7 @@ A demo of Troutopia in action is available at https://litbrick.com/.
 
 ### Version Alpha
 
+* **XX/XX/21:** Implimented optional alt / hover text for comics.
 * **10/29/20:** Fixed a bug allowing you to still click the last comic in the archive. Added the "date=" key to all the comic page URLs.
 * **9/2/20:** Refreshed the code to reflect my name change.
 * **12/12/19:** Bugs ironed out index page comics and navigation.  News posts have been implemented.  Added a safety check to redirect readers to the homepage in case they type an invalid comic date into the URL.
@@ -23,7 +24,7 @@ This is pretty lazy documentation and will be updated in the future, on the off-
 
 ### Installation
 
-* Place troutcave.php in your root directory, alongside comic.php and index.php.
+* Place troutopia.php in your root directory, alongside comic.php and index.php.
 * Edit the variables at the beginning of troutopia.php to reflect your own comic setup.  I'd suggest keeping the default directory variables the same.
 * Place all your comic files (named precisely after YYYY-MM-DD dates) in the comics directory.
 * Place all your news files (named identically to the comic files) in the news directory.
