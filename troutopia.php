@@ -2,22 +2,25 @@
 
 /* TROUTOPIA WEBCOMIC MANAGEMENT SYSTEM */
 
-/* Version Alpha */
+/* Version Alpha 2022.05.13 */
 
-/* Troutopia is a simple webcomic backend for any creator, but mostly for me, Jodie Troutman. It allows users to avoid large installations of other CMS platforms and also gives users more control over their website's design. Troutopia is fairly no-frills and does absolutely no web design for you; all it does is run the webcomic archive with some simple hooks. I taught myself PHP in the process of coding this, so things may or may not work correctly. Feel free to shoot any questions about Troutopia to me on Twitter via @longtalljodie or through e-mail via troutcave@gmail.com. Read my comics at troutcave.net. */
+/* Troutopia is a simple webcomic backend for any creator, but mostly for me, Jodie Troutman. It allows users to avoid large installations of other CMS platforms and also gives users more control over their website's design.
+Troutopia is fairly no-frills and does absolutely no web design for you; all it does is run the webcomic archive with some simple hooks. I taught myself PHP in the process of coding this, so things may or may not work correctly.
+Feel free to shoot any questions about Troutopia to me on Twitter via @LongTallJodie or through e-mail via troutcave@gmail.com. Read my comics at troutcave.net. */
 
 /* The following code has been annotated to the best of my ability, but please reference the Troutopia manual for installation details. */
 
 /* Change the following variables to match your site.  Edit only what's inside the quotes. */
 
-$site = "https://litbrick.com";		// Website URL with leading https:// or http://
+$site = "https://troutcave.net/troutopia";		// Website URL with leading https:// or HTTPS://
 $comic_dir = "comics";				// Comic Directory
 $news_dir = "news";					// News Directory
 $cast_dir = "cast";					// Cast Directory
 $extra_dir = "extra";				// Extra Directory
+$alttext_dir = "alttext";				// Extra Directory
 $comic_ext = "png";					// Comic File Extension (PNG, JPG)
 $news_ext = "php";					// News File Extension (Also Used For Bonuses)
-$first_comic = "2010-04-05";		// Date of the First Comic in YYYY-MM-DD
+$first_comic = "2013-11-04";		// Date of the First Comic in YYYY-MM-DD
 $first_nav = "<span class='fa-stack fa-lg icon-hover' title='First Comic'><i class='fa fa-circle fa-stack-2x icon-background text-shadow'></i><i class='fas fa-angle-double-left fa-stack-1x icon-text'></i></span>";			// Navigation Text (Can Be Any HTML Span)
 $last_nav = "<span class='fa-stack fa-lg icon-hover' title='Last Comic'><i class='fa fa-circle fa-stack-2x icon-background text-shadow'></i><i class='fas fa-angle-double-right fa-stack-1x icon-text'></i></span>";			// Navigation Text (Can Be Any HTML Span)
 $previous_nav = "<span class='fa-stack fa-lg icon-hover' title='Previous Comic'><i class='fa fa-circle fa-stack-2x icon-background text-shadow'></i><i class='fas fa-angle-left fa-stack-1x icon-text'></i></span>";	// Navigation Text (Can Be Any HTML Span)
@@ -164,12 +167,18 @@ function random_comic() {
 /* These functions display the various dynamic sections. */
 
 function show_comic() {
-	global $site, $comic_dir, $comic_ext, $query_date, $last, $pretty_date, $pretty_last_date, $comic_title;
+	global $site, $comic_dir, $comic_ext, $query_date, $last, $pretty_date, $pretty_last_date, $comic_title, $alttext_dir;
 	if ($query_date == null) {
-		echo "<img src='$site/$comic_dir/$last.$comic_ext' alt='$comic_title Comic Strip' title='$comic_title Comic Strip'>";
+		$alttext_file = file_get_contents("$site/$alttext_dir/$last.txt");
+		echo "<img src='$site/$comic_dir/$last.$comic_ext' alt='Comic Strip' title='";
+		echo $alttext_file;
+		echo "'>";
 	} else {
-		echo "<img src='$site/$comic_dir/$query_date.$comic_ext' alt='$comic_title Comic Strip' title='$comic_title Comic Strip'>";
-	}
+		$alttext_file = file_get_contents("$site/$alttext_dir/$query_date.txt");
+		echo "<img src='$site/$comic_dir/$query_date.$comic_ext' alt='Comic Strip' title='";
+		echo $alttext_file;
+		echo "'>";
+	} 
 }
 
 function show_news() {
